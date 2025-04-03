@@ -28,4 +28,4 @@ export class Agent {
 
   @UpdateDateColumn()
   updatedAt: Date;
-} 
+}
