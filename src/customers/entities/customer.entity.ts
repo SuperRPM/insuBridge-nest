@@ -20,8 +20,8 @@ export class Customer {
   @Column({ nullable: true })
   monthlyInsuranceBudget: number;
 
-  @Column({ nullable: true })
-  interestedInsuranceTypes: string;
+  @Column('simple-array', { nullable: true })
+  interestedInsuranceTypes: string[];
 
   @CreateDateColumn()
   createdAt: Date;

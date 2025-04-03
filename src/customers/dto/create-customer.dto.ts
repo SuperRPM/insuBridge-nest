@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsOptional } from 'class-validator';
+import { IsString, IsNumber, IsOptional, IsArray } from 'class-validator';
 
 export class CreateCustomerDto {
   @IsString()
@@ -19,7 +19,8 @@ export class CreateCustomerDto {
   @IsOptional()
   monthlyInsuranceBudget?: number;
 
-  @IsString()
+  @IsArray()
+  @IsString({ each: true })
   @IsOptional()
-  interestedInsuranceTypes?: string;
+  interestedInsuranceTypes?: string[];
 } 
