@@ -2,6 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Customer } from './entities/customer.entity';
+import { CreateCustomerDto } from './dto/create-customer.dto';
+import { UpdateCustomerDto } from './dto/update-customer.dto';
 
 @Injectable()
 export class CustomersService {
@@ -25,14 +27,15 @@ export class CustomersService {
   }
 
   // Go의 func (s *Service) Create(c *Customer) (*Customer, error)와 비슷
-  async create(customer: Customer): Promise<Customer> {
+  async create(createCustomerDto: CreateCustomerDto): Promise<Customer> {
+    const customer = this.customersRepository.create(createCustomerDto);
     return this.customersRepository.save(customer);
   }
 
   // Go의 func (s *Service) Update(id string, c *Customer) (*Customer, error)와 비슷
-  async update(id: number, customer: Customer): Promise<Customer> {
+  async update(id: number, updateCustomerDto: UpdateCustomerDto): Promise<Customer> {
     const existingCustomer = await this.findOne(id);
-    Object.assign(existingCustomer, customer);
+    Object.assign(existingCustomer, updateCustomerDto);
     return this.customersRepository.save(existingCustomer);
   }
 
